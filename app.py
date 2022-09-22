@@ -25,7 +25,14 @@ def get_womens_winners_by_country(country: str, winners: list[dict]):
     return filtered_data
 
 
+def get_mens_winners_by_country(country_name: str) -> list[dict]:
+    data: list[dict] = get_wc_data()
+    return [cup for cup in data if cup['country'] == country_name and cup['competition'] == "men"]
+
+
 if __name__ == '__main__':
     wc_data = get_wc_data()
     womens_winners = get_womens_winners_by_country("United States", wc_data)
     display_winners(womens_winners)
+    mens = get_mens_winners_by_country("Germany")
+    display_winners(mens)
