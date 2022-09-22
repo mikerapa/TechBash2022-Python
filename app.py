@@ -1,6 +1,36 @@
 import json
 from rich import print
 
+from flask import Flask, request
+from random import randint
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def hello():
+    return "Hello, World"
+
+
+@app.route("/nums")
+def get_nums():
+    nums: list(int) = []
+    nums = [randint(0, 10) for _ in range(10)]
+    return nums
+
+
+"""
+IMPORTANT
+Make sure this file is named app.py
+Run in terminal by calling 'flask run'
+"""
+
+
+@app.route("/women")
+def get_womens_world_cup_winners():
+    data: list[dict] = get_wc_data()
+    return [cup for cup in data if cup['competition'] == "women"]
+
 
 def get_wc_data() -> list[dict]:
     data = json.load(open("worldcupdata.json", "r"))
@@ -25,8 +55,10 @@ def get_womens_winners_by_country(country: str, winners: list[dict]):
     return filtered_data
 
 
-def get_mens_winners_by_country(country_name: str) -> list[dict]:
+@app.route("/men", methods=['GET'])
+def get_mens_winners_by_country() -> list[dict]:
     data: list[dict] = get_wc_data()
+    country_name: str = request.args.get('country_name')
     return [cup for cup in data if cup['country'] == country_name and cup['competition'] == "men"]
 
 
