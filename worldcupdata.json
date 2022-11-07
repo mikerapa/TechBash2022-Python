@@ -27,5 +27,5 @@
   { "country": "Germany", "year":2007  ,"competition": "women"},
   { "country": "Japan", "year":2011  ,"competition": "women"},
   { "country": "United States", "year":2015  ,"competition": "women"},
-  { "country": "Unites States", "year":2019  ,"competition": "women"}
+  { "country": "United States", "year":2019  ,"competition": "women"}
 ]
